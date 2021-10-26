@@ -1,0 +1,30 @@
+body {
+    font-family: 'Courier New', Courier, monospace ;
+    background-image: url(../assets/topography.png);
+}
+
+a {
+    color: #ff0099;
+    font-size: 1,5rem;
+    line-height: 80px;
+    margin-right: 20px;
+    float:right;
+}
+
+header {
+    height: 80px;
+    background-color: #333333;
+    padding-inline-start: 100px;
+    padding-inline-end: 100px;
+}
+
+.logo-container {
+    width: 40px;
+    height: 40px;
+    background-image: url(../assets/logo.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #333333;
+    float: left;
+    margin-block-start: 20px;
+}
