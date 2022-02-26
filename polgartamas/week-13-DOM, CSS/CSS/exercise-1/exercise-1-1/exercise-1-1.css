@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.container .item.green {
+  width: 200px;
+  height: 200px;
+  background-color: lightgreen;
+}
+
+.container .item.yellow {
+  width: 200px;
+  height: 200px;
+  background-color: yellow;
+}
+
+.container .item.purple {
+  width: 200px;
+  height: 200px;
+  background-color: purple;
+}

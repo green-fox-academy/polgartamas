@@ -10,31 +10,20 @@
 
 'use strict';
 
-class Sharpie {
-  name: string;
+export class Sharpie {
   color: string;
   width: number;
   inkAmount: number;
 
-  constructor(name: string, color: string, width: number) {
-    this.name = name;
+  constructor(color: string, width: number) {
     this.color = color;
     this.width = width;
     this.inkAmount = 100;
   }
 
-  decreaseInkAmount(): void {
+  use(): void {
     this.inkAmount = this.inkAmount - 10;
-  }
-
-  printSharpieInkAmount(): void {
-    console.log(this.inkAmount);
   }
 }
 
-const blue = new Sharpie('Blue', 'blue', 50);
-blue.printSharpieInkAmount();
-blue.decreaseInkAmount();
-blue.printSharpieInkAmount();
-blue.decreaseInkAmount();
-blue.printSharpieInkAmount();
+const blue = new Sharpie('blue', 50);

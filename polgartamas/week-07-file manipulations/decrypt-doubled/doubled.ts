@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 
-function decryption(source: string): any {
+export function decryptDoubled(source: string): any {
   try {
     const fileContent: any = fs.readFileSync(source, 'utf-8');
     let contentByLines: any = fileContent.split('\n');
@@ -24,4 +24,4 @@ function decryption(source: string): any {
   }
 }
 
-decryption('duplicated-chars.txt');
+decryptDoubled('duplicated-chars.txt');

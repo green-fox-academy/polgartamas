@@ -5,38 +5,32 @@
 //     it has a method that returns the number of usable Sharpies: countUsable() -> sharpie is usable if it contains ink
 //     it has a method that removes all unusable Sharpies: removeTrash()
 
-class Sharpie {
-  name: string;
+export class Sharpie {
   color: string;
   width: number;
   inkAmount: number;
 
-  constructor(name: string, color: string, width: number) {
-    this.name = name;
+  constructor(color: string, width: number) {
     this.color = color;
     this.width = width;
     this.inkAmount = 100;
   }
 
-  decreaseInkAmount(): void {
+  use(): void {
     this.inkAmount = this.inkAmount - 10;
   }
 
-  printSharpieInkAmount(): void {
-    if (this.inkAmount > 0) {
-      console.log(this.inkAmount);
-    } else {
-      console.log('empty');
-    }
+  getInkAmount(): number {
+    return this.inkAmount;
   }
 }
 
-const blue = new Sharpie('Blue', 'blue', 50);
-const red = new Sharpie('Red', 'red', 50);
-const green = new Sharpie('Green', 'green', 50);
-const yellow = new Sharpie('Yellow', 'yellow', 50);
+const blue = new Sharpie('blue', 50);
+const red = new Sharpie('red', 50);
+const green = new Sharpie('green', 50);
+const yellow = new Sharpie('yellow', 50);
 
-class SharpieSet {
+export class SharpieSet {
   listOfSharpies: Sharpie[];
 
   constructor() {
@@ -64,6 +58,10 @@ class SharpieSet {
       }
     }
   }
+
+  getListOfSharpies(): void {
+    console.log(this.listOfSharpies);
+  }
 }
 
 const box = new SharpieSet();
@@ -74,18 +72,17 @@ box.add(yellow);
 console.log(box.listOfSharpies);
 box.countUsable();
 console.log(box.countUsable());
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.decreaseInkAmount();
-blue.printSharpieInkAmount();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
+blue.use();
 box.countUsable();
 console.log(box.countUsable());
 box.removeTrash();
-console.log(box.listOfSharpies);
+box.listOfSharpies;

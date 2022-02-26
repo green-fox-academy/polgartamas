@@ -11,7 +11,7 @@ function initializeDominoes(): Domino[] {
   return dominoes;
 }
 
-function print(dominoes: Domino[]) {
+function print(dominoes: Domino[]): void {
   dominoes.forEach(function (value) {
     console.log(value);
   });

@@ -9,7 +9,7 @@
 
 'use strict';
 
-class Animal {
+export class Animal {
   name: string;
   hunger: number;
   thirst: number;
