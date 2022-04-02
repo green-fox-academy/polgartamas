@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="radio-button-container">
+      <form action="html">
+        <div>
+          <h2>What is your favourite pet?</h2>
+          <label for="dog">
+            Dog
+            <input type="radio" id="dog" name="fav_pet" />
+          </label>
+          <label for="cat">
+            Cat
+            <input type="radio" id="cat" name="fav_pet" />
+          </label>
+          <label for="viktor">
+            Viktor the goldfish
+            <input type="radio" id="viktor" name="fav_pet" />
+          </label>
+        </div>
+        <div>
+          <h2>Do you want to sign up for cat facts?</h2>
+          <label for="yes">
+            Yes
+            <input type="radio" id="yes" name="sign_up" />
+          </label>
+          <label for="no">
+            No
+            <input type="radio" id="no" name="sign_up" />
+          </label>
+        </div>
+        <br />
+        <div>
+          <label for="love_cats">
+            I love cats
+            <input type="radio" id="love_cats" name="love_cats" disabled />
+          </label>
+          <label for="sign_up2">
+            Sign up
+            <input type="radio" id="sign_up2" name="sign_up2" disabled />
+          </label>
+        </div>
+        <input id="submit" type="submit" value="Click!" />
+      </form>
+    </div>
+    <script src="button-disable.js"></script>
+  </body>
+</html>

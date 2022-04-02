@@ -20,22 +20,78 @@ function getBookNames() {
 }
 getBookNames();
 
-const table = document.getElementsByTagName('table');
+const table = document.getElementById('mytable');
+
+function createCellElement(value) {
+  const td = document.createElement('td');
+  td.innerText = value;
+  return td;
+}
+
+const userFilter = {
+  category: 'Science',
+  publisher: null,
+  plt: null,
+  pgt: null,
+};
+
+function createQueryByFilter(filter) {
+  let result = '';
+  let isFirstParam = true;
+  if (filter.category !== null) {
+    if (isFirstParam) {
+      result += '?';
+      isFirstParam = false;
+    } else {
+      result += '&';
+    }
+    result += `category=${filter.category}`;
+  }
+  if (filter.publisher !== null) {
+    if (isFirstParam) {
+      result += '?';
+      isFirstParam = false;
+    } else {
+      result += '&';
+    }
+    result += `category=${filter.publisher}`;
+  }
+  if (filter.plt !== null) {
+    if (isFirstParam) {
+      result += '?';
+      isFirstParam = false;
+    } else {
+      result += '&';
+    }
+    result += `category=${filter.plt}`;
+  }
+  if (filter.pgt !== null) {
+    if (isFirstParam) {
+      result += '?';
+      isFirstParam = false;
+    } else {
+      result += '&';
+    }
+    result += `category=${filter.pgt}`;
+  }
+  return result;
+}
 
 function renderBooks() {
-  return fetch(`${BASE_URL}/allbookdatas`)
+  let url = `${BASE_URL}/allbookdatas`;
+  url += createQueryByFilter(userFilter);
+  console.log(url);
+  return fetch(url)
     .then((response) => response.json())
     .then((books) => {
       const tbody = document.createElement('tbody');
       for (const book of books) {
         const tr = document.createElement('tr');
-        const bookName = createCellElement(`${book.book_name}`);
-        tr.appendChild(bookName);
-        console.log(bookName);
+        tr.appendChild(createCellElement(`${book.book_name}`));
         tr.appendChild(createCellElement(`${book.aut_name}`));
         tr.appendChild(createCellElement(`${book.cate_descrip}`));
-        tr.appendChild(createCellElement(`${book.sell_price}`));
         tr.appendChild(createCellElement(`${book.pub_name}`));
+        tr.appendChild(createCellElement(`${book.book_price}`));
         tbody.appendChild(tr);
       }
       table.appendChild(tbody);

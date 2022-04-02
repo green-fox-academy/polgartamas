@@ -1,6 +1,5 @@
-import express, { response } from 'express';
+import express from 'express';
 import mysql from 'mysql';
-import { stringify } from 'querystring';
 
 const app = express();
 const PORT = 3000;
@@ -23,7 +22,6 @@ conn.connect((err) => {
     console.log('Cannot connect to the db', err);
     return;
   }
-
   console.log('Connection established');
 });
 
@@ -38,14 +36,26 @@ app.get('/booktitles', (request, response) => {
 });
 
 app.get('/allbookdatas', (request, response) => {
-  conn.query(
-    'SELECT b.book_name, a.aut_name, c.cate_descrip, d.sell_price, p.pub_name FROM  book_mast AS b LEFT JOIN author AS a ON b.aut_id=a.aut_id LEFT JOIN category AS c ON b.cate_id=c.cate_id LEFT JOIN despatch AS d ON b.aut_id=d.aut_id LEFT JOIN publisher AS p ON b.pub_id=p.pub_id',
-    (err, allbookdatas) => {
-      if (err) {
-        console.log(err);
-        return response.status(500).json(err);
-      }
-      response.json(allbookdatas);
+  const { category, publisher, plt, pgt } = request.query;
+  let query =
+    'SELECT b.book_name, a.aut_name, c.cate_descrip, p.pub_name, book_price FROM  book_mast AS b LEFT JOIN author AS a ON b.aut_id=a.aut_id LEFT JOIN category AS c ON b.cate_id=c.cate_id LEFT JOIN despatch AS d ON b.aut_id=d.aut_id LEFT JOIN publisher AS p ON b.pub_id=p.pub_id WHERE 1=1';
+  if (category) {
+    query += ` AND c.cate_descrip = '${category}'`;
+  }
+  if (publisher) {
+    query += ` AND p.pub_name = '${publisher}'`;
+  }
+  if (plt) {
+    query += ` AND book_price < ${plt}`;
+  }
+  if (pgt) {
+    query += ` AND book_price > ${pgt}`;
+  }
+  conn.query(query, (err, allbookdatas) => {
+    if (err) {
+      console.log(err);
+      return response.status(500).json(err);
     }
-  );
+    response.json(allbookdatas);
+  });
 });

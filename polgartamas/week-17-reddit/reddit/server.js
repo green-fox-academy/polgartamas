@@ -1,12 +1,13 @@
 import express from 'express';
-
 import mysql from 'mysql';
+import cors from 'cors';
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`Connected to localhost:${PORT}`);
@@ -86,8 +87,9 @@ app.put('/posts/:id/upvote', (request, response) => {
       conn.query(`SELECT * FROM posts WHERE id=(?)`, [id], (err, result) => {
         if (err) {
           console.log(err);
-          return response.status(500).json(mysqlError);
+          return response.status(500).json(err);
         }
+        console.log(result);
         return response.status(200).json(result);
       });
     }
@@ -111,7 +113,7 @@ app.put('/posts/:id/downvote', (request, response) => {
       conn.query(`SELECT * FROM posts WHERE id=(?)`, [id], (err, posts) => {
         if (err) {
           console.log(err);
-          return response.status(500).json(mysqlError);
+          return response.status(500).json(err);
         }
         return response.status(200).json(posts);
       });

@@ -57,8 +57,6 @@ app.get('/appenda/:appendable', (req, res) => {
 app.post('/dountil/:operation', (request, response) => {
   const { operation } = request.params;
   const innerObjectNumber = request.body.until;
-  console.log(operation);
-  console.log(innerObjectNumber);
   if (innerObjectNumber === undefined) {
     return response.status(404);
   }

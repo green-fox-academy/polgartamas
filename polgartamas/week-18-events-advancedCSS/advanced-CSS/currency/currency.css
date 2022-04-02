@@ -1,0 +1,41 @@
+body {
+  background-color: blue;
+}
+
+table {
+  border: 1px solid #222;
+  border-collapse: collapse;
+  width: 600px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: large;
+}
+
+table thead td {
+  background-color: black;
+  color: white;
+  border: 2px solid grey;
+  border-collapse: collapse;
+  padding-left: 20px;
+}
+
+table tbody {
+  background-color: lightgrey;
+}
+
+table tbody tr td {
+  border: 2px solid grey;
+  border-collapse: collapse;
+  padding-left: 20px;
+}
+
+table tbody tr:nth-child(2n) {
+  background-color: white;
+}
+
+table tbody tr td[data-currency='$']::before {
+  content: '$ ';
+}
+
+tr {
+  height: 40px;
+}
