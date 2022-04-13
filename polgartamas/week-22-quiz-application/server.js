@@ -29,28 +29,36 @@ conn.connect((err) => {
 });
 
 app.get('/api/game', (request, response) => {
-  const randomId = Math.floor(Math.random() * 10) + 1;
   conn.query(
-    'SELECT * FROM questions LEFT JOIN answers on questions.id=answers.question_id WHERE questions.id = ?',
-    [randomId],
-    (err, result) => {
+    'SELECT id FROM questions ORDER BY id DESC LIMIT 1',
+    (err, highestId) => {
       if (err) {
         console.log(err);
-        response.status(500).send();
-        return;
+        return response.status(500).send(err);
       }
-      const resultQuestion = result[0].question;
-      for (let i = 0; i < result.length; i++) {
-        delete result[i].question;
-      }
-
-      const newObject = {
-        id: result[0].question_id,
-        question: resultQuestion,
-        answers: result,
-      };
-
-      return response.status(200).json(newObject);
+      const newId = highestId[0].id;
+      const randomId = Math.floor(Math.random() * newId) + 1;
+      conn.query(
+        'SELECT * FROM questions LEFT JOIN answers on questions.id=answers.question_id WHERE questions.id = ?',
+        [randomId],
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            response.status(500).send();
+            return;
+          }
+          const resultQuestion = result[0].question;
+          for (let i = 0; i < result.length; i++) {
+            delete result[i].question;
+          }
+          const newObject = {
+            id: result[0].question_id,
+            question: resultQuestion,
+            answers: result,
+          };
+          return response.status(200).json(newObject);
+        }
+      );
     }
   );
 });
